@@ -11,6 +11,7 @@ Read these before making changes:
 - `.standards/commits.md`
 - `.standards/code-review.md`
 - `.standards/issue-tracker.md`
+- `.standards/agent-review-guide.md`, when asked to review a pull request
 - `.standards/lint-policy.md`
 - `.standards/languages/` for the languages this repository uses
 
