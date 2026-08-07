@@ -13,6 +13,7 @@ rule, open a pull request against `contrl-co/standards`.
 @.standards/commits.md
 @.standards/code-review.md
 @.standards/issue-tracker.md
+@.standards/agent-review-guide.md
 @.standards/lint-policy.md
 
 ## Non-negotiables
