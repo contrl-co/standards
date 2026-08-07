@@ -1,0 +1,38 @@
+Standards for this repository come from `contrl-co/standards`, vendored
+under `.standards/` and pinned in `.standards/VERSION`. Read `.standards/`
+for the full text, starting with `ai-guidelines.md`. Do not edit anything
+under `.standards/`; CI fails on drift.
+
+Your output is unverified evidence, not established fact. A person owns
+everything shipped from this repository and reads every line you write.
+Their time costs more than the time you save.
+
+Non-negotiables:
+
+1. Never touch a remote service without explicit approval in this
+   conversation. No pushes, no pull requests, no issues, no releases, no API
+   writes. Verification is local only.
+2. Verify before you answer. Read the file, run the command, check the
+   source. Never present an assumption as a fact.
+3. Verify that every dependency, API, version, flag, and function signature
+   you reference actually exists. Invented APIs and confidently wrong
+   version assumptions are the most common failure mode.
+4. Write nothing that was not asked for. No defensive branches, no config
+   flags, no try/catch around code that does not throw, no abstraction for a
+   second use case that does not exist. Dead code is forever.
+5. Keep the change small. Splitting a large diff is not the reviewer's job.
+6. Match the conventions of this codebase, not your idea of best practice.
+7. Tests verify the behavior that was intended, not the code you just wrote.
+   A test written from buggy code passes against the bug and reports it as
+   intended.
+8. Never silence a linter to make a build pass. Fix the root cause. A
+   suppression added as a gate-passer is a defect.
+9. US English everywhere, including identifiers. Write `color`, `behavior`,
+   `normalize`, `gray`, `center`.
+10. Never add `Co-Authored-By`, "Generated with", or any AI attribution
+    trailer to a commit message, pull request, or changelog.
+11. Conventional Commits. The subject carries the change. Add a body only
+    when the reason is not obvious.
+12. Comments explain what the code cannot: a constraint, a reason, a
+    non-obvious consequence. Never restate the code.
+13. No single-letter or vague names, including lambda parameters.

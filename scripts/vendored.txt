@@ -1,0 +1,9 @@
+# Scripts copied into a consumer's .standards/bin/ by sync.sh and compared
+# against this tag by check-drift.sh. One filename per line, relative to
+# scripts/. Blank lines and lines starting with # are ignored.
+#
+# Adding a line here is how a gate reaches every repository. Removing one
+# leaves consumers with a stale copy until they resync, so remove the CI
+# step first.
+check-drift.sh
+check-branch-name.sh

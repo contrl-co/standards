@@ -1,0 +1,115 @@
+# Gates for the standards repository itself.
+#
+# The point of this repo is that a rule which can be enforced should be
+# enforced. That applies here first: the prose rules are checked by a script,
+# not by review.
+name: ci
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize, edited, ready_for_review]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  prose:
+    name: Prose rules
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Check US English and attribution trailers
+        run: scripts/check-prose.sh
+
+  shell:
+    name: Shell scripts
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: ShellCheck
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq shellcheck
+          shellcheck --severity=style scripts/*.sh
+
+  templates:
+    name: Template coverage
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Every template carries the non-negotiables
+        shell: bash
+        # A rule that exists only in CLAUDE.md is a rule that Cursor and
+        # Copilot users never see. Each template restates the same short
+        # list, so this checks they have not fallen out of sync.
+        run: |
+          set -euo pipefail
+          templates=(
+            templates/CLAUDE.md
+            templates/AGENTS.md
+            templates/github/copilot-instructions.md
+            templates/cursor/contrl-standards.mdc
+          )
+          required=(
+            "explicit approval in this"
+            "Never present an assumption as a fact"
+            "actually exists"
+            "Dead code is forever"
+            "Splitting a large diff"
+            "not your idea of best practice"
+            "US English"
+            "AI attribution"
+            "silence a linter"
+          )
+          status=0
+          for template in "${templates[@]}"; do
+            for phrase in "${required[@]}"; do
+              if ! grep -qF "$phrase" "$template"; then
+                echo "::error file=$template::missing non-negotiable: $phrase"
+                status=1
+              fi
+            done
+          done
+          exit $status
+
+  sync:
+    name: Sync round trip
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Vendor into a scratch repo and verify the drift check passes
+        shell: bash
+        # sync.sh and check-drift.sh only ever run in other repositories, so
+        # nothing here would catch them breaking. This exercises both against
+        # a throwaway consumer built from the working tree.
+        run: scripts/selftest.sh
+
+  gate:
+    name: Gate summary
+    if: always()
+    needs: [prose, shell, templates, sync]
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Require every gate
+        env:
+          PROSE: ${{ needs.prose.result }}
+          SHELL_RESULT: ${{ needs.shell.result }}
+          TEMPLATES: ${{ needs.templates.result }}
+          SYNC: ${{ needs.sync.result }}
+        run: |
+          set -euo pipefail
+          for result in "$PROSE" "$SHELL_RESULT" "$TEMPLATES" "$SYNC"; do
+            if [ "$result" != success ]; then
+              echo "::error::Required job result was $result."
+              exit 1
+            fi
+          done
