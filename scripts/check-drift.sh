@@ -27,10 +27,10 @@ version_file="$vendor_dir/VERSION"
 pinned_tag=$(sed -n 's/^tag=//p' "$version_file")
 pinned_commit=$(sed -n 's/^commit=//p' "$version_file")
 
-[ -n "$pinned_tag" ] && [ -n "$pinned_commit" ] || {
+if [ -z "$pinned_tag" ] || [ -z "$pinned_commit" ]; then
   echo "check-drift: $version_file does not record both tag and commit." >&2
   exit 1
-}
+fi
 
 workdir=$(mktemp -d)
 trap 'rm -rf "$workdir"' EXIT
