@@ -78,6 +78,13 @@ jobs:
             "US English"
             "AI attribution"
             "silence a linter"
+            "Do the task as asked"
+            "Report faithfully"
+            "narrate progress into the issue tracker"
+            "inventing a key"
+            "Conventional Commits"
+            "restate the code"
+            "single-letter"
           )
           status=0
           for template in "${templates[@]}"; do

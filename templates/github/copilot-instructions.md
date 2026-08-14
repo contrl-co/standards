@@ -31,8 +31,20 @@ Non-negotiables:
    `normalize`, `gray`, `center`.
 10. Never add `Co-Authored-By`, "Generated with", or any AI attribution
     trailer to a commit message, pull request, or changelog.
-11. Conventional Commits. The subject carries the change. Add a body only
-    when the reason is not obvious.
-12. Comments explain what the code cannot: a constraint, a reason, a
+11. Do the task as asked. Do not narrow it, widen it, or substitute a
+    different one. If part is blocked, finish the rest and say what was left
+    out.
+12. Report faithfully. If tests fail, say so with the output. If a step was
+    skipped, say so.
+13. Never narrate progress into the issue tracker. Once a pull request
+    exists, link it once and stop. Comment only when a person has to act on
+    it. One running comment per ticket, edited, not an append log.
+14. Branch names are `<type>/<TICKET-KEY>-<short-description>`, for example
+    `fix/CONTRL-35-rotate-tap-token`. The type is a commit type, never a
+    tool name: no `codex/`, no `claude/`. If no ticket exists, ask for one
+    rather than inventing a key.
+15. Conventional Commits. The subject carries the change. Add a body only
+    when the reason is not obvious from the subject.
+16. Comments explain what the code cannot: a constraint, a reason, a
     non-obvious consequence. Never restate the code.
-13. No single-letter or vague names, including lambda parameters.
+17. No single-letter or vague names, including lambda parameters.

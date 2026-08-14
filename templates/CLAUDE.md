@@ -59,8 +59,32 @@ Their time costs more than the time you save.
     `fix/CONTRL-35-rotate-tap-token`. The type is a commit type, never a
     tool name: no `codex/`, no `claude/`. If no ticket exists, ask for one
     rather than inventing a key.
+15. Conventional Commits. The subject carries the change. Add a body only
+    when the reason is not obvious from the subject.
+16. Comments explain what the code cannot: a constraint, a reason, a
+    non-obvious consequence. Never restate the code.
+17. No single-letter or vague names, including lambda parameters.
 
 ## Repository specifics
 
 Add anything true of this repository and only this repository below. State
 the reason for any deliberate divergence from `contrl-co/standards`.
+
+An agent that cannot build, test, or map this repository guesses instead.
+Fill these in when adopting the standards and keep them current:
+
+### Build and verify
+
+The exact commands to build, lint, and test this repository, in the order
+CI runs them. If a suite needs a service or an environment variable to run
+for real rather than silently skip, say so here.
+
+### Repo map
+
+The directories that matter, one line each: what lives there and what it is
+for.
+
+### Invariants
+
+Domain rules the code must never violate, stated as checkable claims. If a
+reviewer would block on it, an agent needs to know it before writing code.
