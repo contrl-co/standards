@@ -12,12 +12,17 @@ set -euo pipefail
 
 status=0
 
+# A while-read loop rather than mapfile: macOS ships bash 3.2, and a gate
+# that only runs on CI is a gate you find out about too late.
+files=()
 if [ $# -gt 0 ]; then
-  mapfile -t files < <(printf '%s\n' "$@")
+  for argument in "$@"; do files+=("$argument"); done
 else
   # --others so a file that has not been staged yet is still checked. A rule
   # that only applies after git add is a rule you find out about too late.
-  mapfile -t files < <(
+  while IFS= read -r tracked_file; do
+    files+=("$tracked_file")
+  done < <(
     git ls-files --cached --others --exclude-standard \
       -- '*.md' '*.mdc' '*.go' '*.kt' '*.kts' '*.py' '*.ts' '*.tsx' '*.js' '*.sh' '*.yml' '*.yaml'
   )
@@ -46,9 +51,11 @@ report() { # label, pattern, hint
 }
 
 # Anchored on a word boundary so 'colorize' and 'Behaviors' produce no noise.
-# Proper nouns that legitimately use a British spelling take a prose-allow
-# marker on the line.
-uk_pattern='\b([Cc]olour|[Bb]ehaviour|[Nn]ormalis|[Ii]nitialis|[Aa]nalys[ei]|[Oo]rganis|[Rr]ecognis|[Ss]erialis|[Gg]rey|[Cc]entre|[Ll]icence|[Dd]efence|[Cc]atalogue)'
+# The -is stems are spelled out so valid US words that share a prefix
+# ('analysis', 'organism', 'initialism') do not trip the gate. Proper nouns
+# that legitimately use a British spelling take a prose-allow marker on the
+# line.
+uk_pattern='\b([Cc]olour|[Bb]ehaviour|[Nn]ormalis(e|ation|ing)|[Ii]nitialis(e|ation|ing)|[Aa]nalys(e\b|ed|ing)|[Oo]rganis(e|ation|ing)|[Rr]ecognis(e|ation|ing)|[Ss]erialis(e|ation|ing)|[Gg]rey|[Cc]entre|[Ll]icence|[Dd]efence|[Cc]atalogue)'
 report "UK spelling" \
   "$uk_pattern" \
   "US English everywhere, including identifiers. See standards/prose.md."
