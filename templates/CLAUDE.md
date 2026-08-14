@@ -14,10 +14,10 @@ rule, open a pull request against `contrl-co/standards`.
 @.standards/commits.md
 @.standards/code-review.md
 @.standards/issue-tracker.md
-@.standards/agent-review-guide.md
 @.standards/lint-policy.md
 
-Also read `.standards/languages/` for the languages this repository uses.
+Also read `.standards/languages/` for the languages this repository uses,
+and `.standards/agent-review-guide.md` when asked to review a pull request.
 
 ## Non-negotiables
 
