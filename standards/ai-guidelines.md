@@ -108,3 +108,10 @@ We do not ship noise. We ship judgment.
   not do. This file covers what you owe a reader.
 - [code-review.md](code-review.md) turns the pre-pull-request list above into
   what a reviewer blocks on.
+
+## Provenance
+
+Adapted from the company AI Guidelines page in Confluence (Wiki space, last
+modified 31 Jul 2026). This file is the canonical engineering copy; the
+Confluence page is the company-wide one. When either changes in substance,
+re-sync the other by hand and note it in the changelog.

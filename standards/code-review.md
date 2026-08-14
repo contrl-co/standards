@@ -1,5 +1,12 @@
 # Code review
 
+## Every change arrives as a pull request
+
+Protected branches (`main`, `develop`) take changes through pull requests
+only. A direct push is never requested and never the fix, even for an owner,
+even for a one-line docs change. A red base branch is repaired by a
+fix-forward pull request.
+
 ## Every pull request tracks a ticket
 
 Open the ticket before the branch. The branch name carries its key
