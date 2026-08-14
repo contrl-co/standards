@@ -5,6 +5,7 @@ Read these in order on your first day. After that, treat them as reference.
 | File | Covers |
 |---|---|
 | [ai-guidelines.md](ai-guidelines.md) | Why any of this exists. What you owe a reader. Read this first. |
+| [context.md](context.md) | What we build, where the code lives, and the invariants no change may weaken. |
 | [agent-boundaries.md](agent-boundaries.md) | What a coding agent may and may not do. |
 | [prose.md](prose.md) | Writing rules for code, comments, docs, and commit messages. |
 | [commits.md](commits.md) | Commit format, signing, merge methods. |

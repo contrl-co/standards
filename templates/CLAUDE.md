@@ -8,6 +8,7 @@ Read `.standards/` before making changes. Do not edit files under
 rule, open a pull request against `contrl-co/standards`.
 
 @.standards/ai-guidelines.md
+@.standards/context.md
 @.standards/agent-boundaries.md
 @.standards/prose.md
 @.standards/commits.md
@@ -15,6 +16,8 @@ rule, open a pull request against `contrl-co/standards`.
 @.standards/issue-tracker.md
 @.standards/agent-review-guide.md
 @.standards/lint-policy.md
+
+Also read `.standards/languages/` for the languages this repository uses.
 
 ## Non-negotiables
 
