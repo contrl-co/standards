@@ -52,9 +52,10 @@ Then add one job to the consumer's CI:
   standards:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@<pinned-sha>
       - run: .standards/bin/check-drift.sh
       - run: .standards/bin/check-branch-name.sh
+      - run: .standards/bin/check-prose.sh
 ```
 
 `check-branch-name.sh` reads `GITHUB_HEAD_REF` on a pull request, and skips

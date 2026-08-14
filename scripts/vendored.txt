@@ -7,3 +7,4 @@
 # step first.
 check-drift.sh
 check-branch-name.sh
+check-prose.sh
