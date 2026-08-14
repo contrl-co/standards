@@ -9,6 +9,18 @@ by rerunning `scripts/sync.sh`.
 
 ## Unreleased
 
+### Fixed
+
+- `check-prose.sh` no longer flags the US words analysis, organism, and
+  initialism: the `-is` stems are spelled out in the pattern. It also runs
+  on stock macOS bash 3.2, replacing `mapfile` with a while-read loop, so
+  the gate works locally before it fails remotely.
+- CI no longer cancels a running gate when a pull request title or body is
+  edited. Only a new push supersedes the run that is checking it.
+- The changelog's pointer to the ai-guidelines provenance now resolves:
+  the file carries a provenance section naming the Confluence source and
+  the by-hand re-sync rule.
+
 ### Changed
 
 - Every template now carries the same seventeen non-negotiables. The Cursor
@@ -26,8 +38,20 @@ by rerunning `scripts/sync.sh`.
   in `Co-Authored-By`.
 - The pre-pull-request list in code-review.md puts a number on small: aim
   under 400 changed lines.
+- `check-prose.sh` is vendored to consumers via `scripts/vendored.txt` and
+  the README CI example, so the US-English and no-attribution gates reach
+  every repository instead of only this one.
+- code-review.md opens with the pull-request-only rule: protected branches
+  take changes through pull requests, never direct pushes, even from an
+  owner, even for one line.
 
 ### Added
+
+- `standards/context.md`: what we build, where the code lives (GitHub org
+  `contrl-co` authoritative, GitLab legacy read-only), and the invariants
+  no change may weaken — no master key, canonical-output stability, fail
+  closed, and no silently skipping tests. Referenced from the standards
+  index and both instruction templates.
 
 - `standards/ai-guidelines.md`, adapted from the company AI Guidelines page
   in Confluence (last modified 31 Jul 2026, retrieved 7 Aug 2026). Covers
