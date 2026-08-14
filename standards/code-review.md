@@ -88,7 +88,9 @@ Your job, not the reviewer's. The full list is in
 - Run the code.
 - Verify every dependency, API, version, and function signature exists.
 - Remove code you do not understand, and anything you did not ask for.
-- Keep the change small. Splitting 800 generated lines is your job.
+- Keep the change small: aim under 400 changed lines. Review quality falls
+  with size, and a skimmed review is not a review. Splitting 800 generated
+  lines is your job.
 - Match the conventions of this codebase, not a model's idea of best
   practice.
 
