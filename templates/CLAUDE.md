@@ -8,7 +8,6 @@ Read `.standards/` before making changes. Do not edit files under
 rule, open a pull request against `contrl-co/standards`.
 
 @.standards/ai-guidelines.md
-@.standards/context.md
 @.standards/agent-boundaries.md
 @.standards/prose.md
 @.standards/commits.md

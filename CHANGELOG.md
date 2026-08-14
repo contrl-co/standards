@@ -47,12 +47,6 @@ by rerunning `scripts/sync.sh`.
 
 ### Added
 
-- `standards/context.md`: what we build, where the code lives (GitHub org
-  `contrl-co` authoritative, GitLab legacy read-only), and the invariants
-  no change may weaken — no master key, canonical-output stability, fail
-  closed, and no silently skipping tests. Referenced from the standards
-  index and both instruction templates.
-
 - `standards/ai-guidelines.md`, adapted from the company AI Guidelines page
   in Confluence (last modified 31 Jul 2026, retrieved 7 Aug 2026). Covers
   the cost asymmetry between generating and reviewing AI output, the

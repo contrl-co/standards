@@ -6,7 +6,6 @@ under `.standards/` and pinned in `.standards/VERSION`.
 Read these before making changes:
 
 - `.standards/ai-guidelines.md`
-- `.standards/context.md`
 - `.standards/agent-boundaries.md`
 - `.standards/prose.md`
 - `.standards/commits.md`
