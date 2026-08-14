@@ -19,6 +19,11 @@ by rerunning `scripts/sync.sh`.
 - `standards/issue-tracker.md`. Tickets carry the ask, not a build log. No
   status narration once a pull request exists, one running comment rather
   than an append log, and comments only when a person has to act.
+- `standards/agent-review-guide.md`, a prompt for an agent reviewing a pull
+  request alongside a human. Lists what CI already gates so the agent skips
+  it, the failure modes worth its attention, per-standard violation
+  signatures, what it cannot verify, and an output contract that caps
+  findings and forbids praise or diff summaries.
 - Initial standards: agent boundaries, prose, commits, code review, and lint
   policy.
 - Every pull request tracks a ticket, and branch names carry its key:
