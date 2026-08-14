@@ -53,7 +53,7 @@ report "UK spelling" \
   "$uk_pattern" \
   "US English everywhere, including identifiers. See standards/prose.md."
 
-attribution_pattern='(Co-Authored-By:.*(Claude|GPT|Copilot|Gemini)|Generated with \[?Claude)' # prose-allow
+attribution_pattern='(Co-Authored-By:.*(Claude|GPT|Copilot|Gemini|Codex|Cursor|Devin|OpenAI|Anthropic)|Generated (with|by) \[?(Claude|ChatGPT|GPT|Copilot|Gemini|Codex)|🤖 Generated)' # prose-allow
 report "AI attribution trailer" \
   "$attribution_pattern" \
   "Never attribute commits or docs to an agent. See standards/commits.md."
