@@ -23,7 +23,7 @@ concurrency:
 jobs:
   prose:
     name: Prose rules
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Check US English and attribution trailers
@@ -31,7 +31,7 @@ jobs:
 
   shell:
     name: Shell scripts
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: ShellCheck
@@ -52,7 +52,7 @@ jobs:
 
   templates:
     name: Template coverage
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Every template carries the non-negotiables
@@ -92,7 +92,7 @@ jobs:
 
   sync:
     name: Sync round trip
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Vendor into a scratch repo and verify the drift check passes
@@ -106,7 +106,7 @@ jobs:
     name: Gate summary
     if: always()
     needs: [prose, shell, templates, sync]
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted
     steps:
       - name: Require every gate
         env:
