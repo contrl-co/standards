@@ -50,7 +50,7 @@ the findings that need a person.
 | Already gated                                 | By                     |
 |-----------------------------------------------|------------------------|
 | US spelling, AI attribution trailers          | `check-prose.sh`       |
-| Shell script lint                             | pinned shellcheck      |
+| Shell script lint                             | `check-shell.sh`       |
 | Branch shape and ticket key                   | `check-branch-name.sh` |
 | Edited or deleted vendored `.standards/`      | `check-drift.sh`       |
 | Exactly one type and one status label         | the label gate         |
