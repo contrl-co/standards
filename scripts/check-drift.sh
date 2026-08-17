@@ -15,6 +15,25 @@ set -euo pipefail
 # never set it.
 readonly SOURCE_REPO="${STANDARDS_REPO:-https://github.com/contrl-co/standards.git}"
 
+# STANDARDS_TOKEN lets a consumer read this repository while it is private. A
+# workflow's own GITHUB_TOKEN is scoped to the repository that runs it and
+# cannot read a different private one, so without this the clone below fails
+# with "could not read Username for https://github.com".
+#
+# Unset, nothing changes: the clone stays anonymous, which is what a public
+# contrl-co/standards wants and what every existing consumer already does.
+#
+# The token is passed through a credential helper rather than embedded in the
+# URL or in a -c argument, so it never appears in argv, in `ps`, or in the
+# error message git prints when a clone fails.
+credential_args=()
+if [ -n "${STANDARDS_TOKEN:-}" ]; then
+  credential_args=(
+    -c "credential.helper="
+    -c "credential.helper=!f() { echo username=x-access-token; echo password=\$STANDARDS_TOKEN; }; f"
+  )
+fi
+
 script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 vendor_dir=$(dirname "$script_dir")
 version_file="$vendor_dir/VERSION"
@@ -35,7 +54,11 @@ fi
 workdir=$(mktemp -d)
 trap 'rm -rf "$workdir"' EXIT
 
-git -c advice.detachedHead=false clone --quiet --depth 1 --branch "$pinned_tag" \
+# The ${a[@]+"${a[@]}"} form is required: under `set -u`, expanding an empty
+# array as "${a[@]}" is an unbound-variable error on bash before 4.4, which is
+# what macOS ships and what selftest.sh runs under locally.
+git -c advice.detachedHead=false ${credential_args[@]+"${credential_args[@]}"} \
+  clone --quiet --depth 1 --branch "$pinned_tag" \
   "$SOURCE_REPO" "$workdir/standards"
 actual_commit=$(git -C "$workdir/standards" rev-parse HEAD)
 

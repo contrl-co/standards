@@ -11,6 +11,17 @@ by rerunning `scripts/sync.sh`.
 
 ### Added
 
+- `scripts/check-drift.sh` accepts an optional `STANDARDS_TOKEN`. A consumer's
+  own `GITHUB_TOKEN` is scoped to the repository that runs it and cannot read
+  a different private one, so a consumer of a private `contrl-co/standards`
+  could not run the drift check at all. Unset, the clone stays anonymous and
+  nothing changes for an existing consumer. The token is passed through a
+  credential helper, so it never reaches argv or git's error output.
+
+## v1.0.0
+
+### Added
+
 - `standards/ai-guidelines.md`, adapted from the company AI Guidelines page
   in Confluence (last modified 31 Jul 2026, retrieved 7 Aug 2026). Covers
   the cost asymmetry between generating and reviewing AI output, the
