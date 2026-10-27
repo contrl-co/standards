@@ -10,6 +10,7 @@ Read these in order on your first day. After that, treat them as reference.
 | [commits.md](commits.md) | Commit format, signing, merge methods. |
 | [code-review.md](code-review.md) | Labels, approvals, required checks, what blocks a merge. |
 | [issue-tracker.md](issue-tracker.md) | What a ticket is for, and what does not belong in a comment. |
+| [agent-review-guide.md](agent-review-guide.md) | Point an agent at this to review a pull request against these standards. |
 | [lint-policy.md](lint-policy.md) | Why suppressing a linter is a defect. |
 | [languages/go.md](languages/go.md) | Go specifics. |
 | [languages/python.md](languages/python.md) | Python specifics. |

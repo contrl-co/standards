@@ -109,6 +109,11 @@ The author is accountable for the diff regardless of what produced it.
 AI review is encouraged. Human review is required. An AI review does not
 satisfy the CODEOWNER approval.
 
+To run one, point an agent at
+[agent-review-guide.md](agent-review-guide.md). It tells the agent what CI
+already gates so it does not spend its attention there, what to check
+instead, and how to report findings without burying you in output.
+
 Look specifically for:
 
 - Suppressed lint findings, added tests that assert nothing, and error paths
